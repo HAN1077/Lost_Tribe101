@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost Tribe Motorcycle Gang | Cyberjaya HQ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Poppins,sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #000;
+            color: white;
+        }
+
+        header {
+            background: #111;
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #fff;
+        }
+
+            header h1 {
+                color: white;
+                font-size: 28px;
+            }
+
+            header a {
+                color: #ff0000;
+                font-weight: 600;
+                text-decoration: none;
+            }
+
+                header a:hover {
+                    color: #fff;
+                }
+
+        .hero {
+            position: relative;
+            height: 85vh;
+            overflow: hidden;
+        }
+
+        .slides {
+            position: relative;
+            height: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            top: 0;
+            left: 100%;
+            opacity: 0;
+            transition: all 0.7s ease-in-out;
+        }
+
+            .slide.active {
+                left: 0;
+                opacity: 1;
+            }
+
+        .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            text-align: center;
+            color: #fff;
+            text-shadow: 2px 2px 6px #000;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 50%;
+            user-select: none;
+            z-index: 10;
+        }
+
+            .nav-btn.prev {
+                left: 20px;
+            }
+
+            .nav-btn.next {
+                right: 20px;
+            }
+
+        .dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #fff;
+            opacity: 0.5;
+            cursor: pointer;
+        }
+
+            .dot.active {
+                opacity: 1;
+                background: #ff0000;
+            }
+
+        section {
+            padding: 80px 8%;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 32px;
+            color: white;
+        }
+
+        .gallery, .crew {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: #111;
+            padding: 20px;
+            border-radius: 15px;
+            transition: 0.6s;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+            .card.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 0 25px rgba(255,0,0,0.6);
+            }
+
+            .card img {
+                width: 100%;
+                height: 180px;
+                object-fit: cover;
+                border-radius: 10px;
+                margin-bottom: 15px;
+            }
+
+        button {
+            padding: 8px 15px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 20px;
+            background: #ff0000;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+            button:hover {
+                background: white;
+                color: #ff0000;
+            }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: none;
+        }
+
+        footer {
+            background: #111;
+            padding: 25px;
+            text-align: center;
+            color: #aaa;
+        }
+
+        iframe {
+            width: 100%;
+            height: 480px;
+            border: none;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #111;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+            table th, table td {
+                padding: 15px;
+                text-align: left;
+                border-bottom: 1px solid #222;
+            }
+
+            table th {
+                background: #222;
+                color: #ff0000;
+            }
+
+            table tr:last-child td {
+                border-bottom: none;
+            }
+
+        .chart {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+            .chart .role {
+                background: #111;
+                padding: 20px;
+                border-radius: 15px;
+                text-align: center;
+                width: 200px;
+                position: relative;
+                transition: 0.6s;
+                opacity: 0;
+                transform: translateY(40px);
+                cursor: pointer;
+            }
+
+                .chart .role.show {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+                .chart .role::before {
+                    content: "Solid 5";
+                    position: absolute;
+                    top: -20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #ff0000;
+                    color: #fff;
+                    padding: 2px 8px;
+                    border-radius: 10px;
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+
+        .motorbike {
+            position: absolute;
+            width: 80px;
+            height: 40px;
+            background: red;
+            border-radius: 20px;
+            top: -50px;
+            transition: all 2s ease;
+        }
+
+        .popup iframe {
+            width: 350px;
+            height: 600px;
+            border: none;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Lost Tribe Motorcycle Gang</h1>
+        <a href="https://www.instagram.com/lost_tribe_motorgang" target="_blank">Instagram</a>
+    </header>
+
+    <!-- ===== HERO SLIDES ===== -->
+    <div class="hero" id="heroSlide">
+        <div class="slides">
+            <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1607013252367-d8c8f2b6c29b?auto=format&fit=crop&w=1600&q=80');"></div>
+            <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=1600&q=80');"></div>
+            <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1601582582023-0662ee5e3fa8?auto=format&fit=crop&w=1600&q=80');"></div>
+            <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1558981403-c6f0b8a2347b?auto=format&fit=crop&w=1600&q=80');"></div>
+            <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1620214431913-316d948e2cf6?auto=format&fit=crop&w=1600&q=80');"></div>
+            <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80');"></div>
+            <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1526318472351-3d2d8b8aa1a3?auto=format&fit=crop&w=1600&q=80');"></div>
+            <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1607079738427-9f9c73db2de2?auto=format&fit=crop&w=1600&q=80');"></div>
+        </div>
+
+        <div class="hero-text">
+            <h2>Lost Tribe Motorcycle Gang</h2>
+            <p>Cyberjaya HQ • Since 2025 • Ride or Die</p>
+        </div>
+
+        <div class="nav-btn prev">&#10094;</div>
+        <div class="nav-btn next">&#10095;</div>
+        <div class="dots" id="dotsContainer"></div>
+    </div>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about">
+        <h2>About Us</h2>
+        <div class="card">
+            <p>Lost Tribe Motorcycle Gang is a brotherhood of motorcycle enthusiasts based in Cyberjaya. Founded in 2025, our tribe rides Harley Davidson, custom bikes, and sport bikes across Malaysia. We ride hard, stay loyal, and embrace the freedom of the road.</p>
+        </div>
+    </section>
+
+    <!-- ===== SHOWCASE / GALLERY ===== -->
+    <section id="showcase">
+        <h2>Our Bikes & Rides</h2>
+        <div class="gallery">
+            <div class="card"><img src="https://images.unsplash.com/photo-1607013252367-d8c8f2b6c29b?auto=format&fit=crop&w=800&q=80"><p>Harley Davidson • Road King</p></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=800&q=80"><p>Custom Chopper • Street Ride</p></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1601582582023-0662ee5e3fa8?auto=format&w=800&q=80"><p>Sport Bike • Yamaha R1</p></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1558981403-c6f0b8a2347b?auto=format&w=800&q=80"><p>Harley Davidson • Softail</p></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1620214431913-316d948e2cf6?auto=format&w=800&q=80"><p>Road Cruiser • Ducati</p></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&w=800&q=80"><p>Custom Cafe Racer • Honda CB</p></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1526318472351-3d2d8b8aa1a3?auto=format&w=800&q=80"><p>Harley Davidson • Sport Glide</p></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1607079738427-9f9c73db2de2?auto=format&w=800&q=80"><p>BMW R1250 • Adventure</p></div>
+        </div>
+    </section>
+
+    <!-- ===== CREW / ORGANIZATION CHART ===== -->
+    <section id="crew">
+        <h2>Our Tribe</h2>
+        <div class="chart">
+            <div class="role" id="captain">
+                <h3>Jai</h3>
+                <p>Captain</p>
+                <p>Bike: Medenas Jaguh</p>
+            </div>
+            <div class="role" id="treasurer">
+                <h3>Adli</h3>
+                <p>Treasurer</p>
+                <p>Bike: Brixton</p>
+            </div>
+            <div class="role" id="advisor">
+                <h3>Sham</h3>
+                <p>Advisor</p>
+                <p>Bike: Duke 200</p>
+            </div>
+            <div class="role" id="enforcer">
+                <h3>Han</h3>
+                <p>Enforcer</p>
+                <p>Bike: Wmoto M16</p>
+            </div>
+            <div class="role" id="sgt">
+                <h3>Aiman</h3>
+                <p>Sgt A Arm</p>
+                <p>Bike: KTM Duke 200</p>
+            </div>
+        </div>
+        <div class="motorbike" id="motorbike"></div>
+    </section>
+
+    <!-- ===== INSTAGRAM FEED ===== -->
+    <section id="instagram">
+        <h2>Instagram Feed</h2>
+        <div class="gallery">
+            <iframe src="https://www.instagram.com/p/DTBLJOak2mh/embed" allowtransparency="true"></iframe>
+            <iframe src="https://www.instagram.com/p/DTFSnL-j5xI/embed" allowtransparency="true"></iframe>
+            <iframe src="https://www.instagram.com/reel/DSZCjUjj4sh/embed" allowtransparency="true"></iframe>
+            <iframe src="https://www.instagram.com/reel/DTu5X0AjxOe/embed" allowtransparency="true"></iframe>
+        </div>
+        <p style="text-align:center;margin-top:15px;"><a href="https://www.instagram.com/lost_tribe_motorgang" target="_blank" style="color:#ff0000;">@lost_tribe_motorgang</a></p>
+    </section>
+
+    <!-- ===== LOCATION ===== -->
+    <section id="location">
+        <h2>Cyberjaya HQ</h2>
+        <div class="card">
+            <iframe src="https://maps.google.com/maps?q=Cyberjaya&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+        </div>
+    </section>
+
+    <footer>
+        📍 Cyberjaya HQ | © 2026 Lost Tribe Motorcycle Gang
+    </footer>
+
+    <script>
+        // ===== HERO SLIDES =====
+        const slides = document.querySelectorAll('.slide');
+        const dotsContainer = document.getElementById('dotsContainer');
+        let currentSlide = 0;
+        let slideInterval;
+
+        slides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => { goToSlide(i); resetAutoSlide(); });
+            dotsContainer.appendChild(dot);
+        });
+        const dots = document.querySelectorAll('.dot');
+
+        function goToSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            currentSlide = n;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() { goToSlide((currentSlide + 1) % slides.length); }
+        function prevSlide() { goToSlide((currentSlide - 1 + slides.length) % slides.length); }
+
+        document.querySelector('.nav-btn.next').addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
+        document.querySelector('.nav-btn.prev').addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
+
+        function startAutoSlide() { slideInterval = setInterval(nextSlide, 5000); }
+        function resetAutoSlide() { clearInterval(slideInterval); startAutoSlide(); }
+        startAutoSlide();
+
+        let startX = 0, endX = 0;
+        const hero = document.getElementById('heroSlide');
+        hero.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; });
+        hero.addEventListener('touchmove', (e) => { endX = e.touches[0].clientX; });
+        hero.addEventListener('touchend', () => {
+            let diff = startX - endX;
+            if (diff > 50) nextSlide();
+            if (diff < -50) prevSlide();
+            resetAutoSlide();
+        });
+
+        // Scroll animation
+        window.addEventListener("scroll", () => {
+            document.querySelectorAll(".card, .role").forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) { el.classList.add("show"); }
+            });
+        });
+
+        // Motorbike animation moving to chart on scroll
+        const bike = document.getElementById('motorbike');
+        const crewSection = document.getElementById('crew');
+        window.addEventListener('scroll', () => {
+            const rect = crewSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 50) {
+                bike.style.top = (rect.top + 100) + 'px';
+                bike.style.left = 'calc(50% - 40px)';
+            }
+        });
+
+        // ===== CREW POPUP =====
+        const roles = document.querySelectorAll('.chart .role');
+        const igLinks = {
+            'captain': 'https://www.instagram.com/farkhankmn/',
+            'treasurer': 'https://www.instagram.com/wachito.chico/',
+            'advisor': 'https://www.instagram.com/hsym.co.ig/',
+            'enforcer': 'https://www.instagram.com/han_xzmy/',
+            'sgt': 'https://www.instagram.com/not.amirulaiman/'
+        };
+        const popup = document.createElement('div');
+        popup.classList.add('popup');
+        popup.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);display:flex;justify-content:center;align-items:center;z-index:9999;display:none;';
+        const iframe = document.createElement('iframe');
+        iframe.style.cssText = 'width:350px;height:600px;border:none;border-radius:15px;';
+        const closeBtn = document.createElement('span');
+        closeBtn.innerHTML = '&times;';
+        closeBtn.style.cssText = 'position:absolute;top:20px;right:25px;color:white;font-size:30px;cursor:pointer;font-weight:bold;';
+        popup.appendChild(closeBtn);
+        popup.appendChild(iframe);
+        document.body.appendChild(popup);
+
+        roles.forEach(role => {
+            role.style.transition = 'transform 0.3s, box-shadow 0.3s';
+            role.addEventListener('mouseenter', () => {
+                role.style.transform = 'translateY(-10px) scale(1.05)';
+                role.style.boxShadow = '0 0 25px rgba(255,0,0,0.6)';
+            });
+            role.addEventListener('mouseleave', () => {
+                role.style.transform = 'translateY(0) scale(1)';
+                role.style.boxShadow = 'none';
+            });
+            role.addEventListener('click', () => {
+                const id = role.id;
+                iframe.src = igLinks[id] + 'embed';
+                popup.style.display = 'flex';
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            iframe.src = '';
+            popup.style.display = 'none';
+        });
+        popup.addEventListener('click', e => {
+            if (e.target === popup) {
+                iframe.src = '';
+                popup.style.display = 'none';
+            }
+        });
+    </script>
+
+</body>
+</html>
