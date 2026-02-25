@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lost Tribe Motorcycle Gang | Cyberjaya HQ</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <style>
         * {
@@ -237,64 +238,6 @@
                 border-bottom: none;
             }
 
-        .chart {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-
-            .chart .role {
-                background: #111;
-                padding: 20px;
-                border-radius: 15px;
-                text-align: center;
-                width: 200px;
-                position: relative;
-                transition: 0.6s;
-                opacity: 0;
-                transform: translateY(40px);
-                cursor: pointer;
-            }
-
-                .chart .role.show {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-
-                .chart .role::before {
-                    content: "Solid 5";
-                    position: absolute;
-                    top: -20px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    background: #ff0000;
-                    color: #fff;
-                    padding: 2px 8px;
-                    border-radius: 10px;
-                    font-size: 14px;
-                    font-weight: 600;
-                }
-
-        .motorbike {
-            position: absolute;
-            width: 80px;
-            height: 40px;
-            background: red;
-            border-radius: 20px;
-            top: -50px;
-            transition: all 2s ease;
-        }
-
-        .popup iframe {
-            width: 350px;
-            height: 600px;
-            border: none;
-            border-radius: 15px;
-        }
-
         .chart-horizontal {
     display: flex;
     justify-content: center;
@@ -371,7 +314,7 @@
 
     <header>
         <h1>Lost Tribe Motorcycle Gang</h1>
-        <a href="https://www.instagram.com/lost_tribe_motorgang" target="_blank">Instagram</a>
+        <a href="https://www.instagram.com/lost_tribe_motorgang" target="_blank"><i class="fab fa-instagram"></i></a>
     </header>
 
     <!-- ===== HERO SLIDES ===== -->
@@ -411,16 +354,6 @@
     <div class="nav-btn next">&#10095;</div>
     <div class="dots" id="dotsContainer"></div>
 </div>
-
-        <div class="hero-text">
-            <h2>Lost Tribe Motorcycle Gang</h2>
-            <p>Cyberjaya HQ • Since 2025 • Ride or Die</p>
-        </div>
-
-        <div class="nav-btn prev">&#10094;</div>
-        <div class="nav-btn next">&#10095;</div>
-        <div class="dots" id="dotsContainer"></div>
-    </div>
 
     <!-- ===== ABOUT ===== -->
     <section id="about">
@@ -573,24 +506,13 @@ Ride with honor. Stand with loyalty. Live with freedom.</p>
 
         // Scroll animation
         window.addEventListener("scroll", () => {
-            document.querySelectorAll(".card, .role").forEach(el => {
+            document.querySelectorAll(".card, .circle-role").forEach(el => {
                 if (el.getBoundingClientRect().top < window.innerHeight - 100) { el.classList.add("show"); }
             });
         });
 
-        // Motorbike animation moving to chart on scroll
-        const bike = document.getElementById('motorbike');
-        const crewSection = document.getElementById('crew');
-        window.addEventListener('scroll', () => {
-            const rect = crewSection.getBoundingClientRect();
-            if (rect.top < window.innerHeight - 50) {
-                bike.style.top = (rect.top + 100) + 'px';
-                bike.style.left = 'calc(50% - 40px)';
-            }
-        });
-
         // ===== CREW POPUP =====
-        const roles = document.querySelectorAll('.chart .role');
+        const roles = document.querySelectorAll('.circle-role');
         const igLinks = {
             'captain': 'https://www.instagram.com/farkhankmn/',
             'treasurer': 'https://www.instagram.com/wachito.chico/',
@@ -637,15 +559,6 @@ Ride with honor. Stand with loyalty. Live with freedom.</p>
                 popup.style.display = 'none';
             }
         });
-
-        // Scroll animation for circle roles
-window.addEventListener("scroll", () => {
-    document.querySelectorAll(".circle-role").forEach(el => {
-        if (el.getBoundingClientRect().top < window.innerHeight - 100) {
-            el.classList.add("show");
-        }
-    });
-});
     </script>
 
 </body>
