@@ -294,6 +294,76 @@
             border: none;
             border-radius: 15px;
         }
+
+        .chart-horizontal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.circle-role {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #111;
+    border: 4px solid #ff0000;
+    transition: all 0.4s ease;
+    opacity: 0;
+    transform: translateY(30px);
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.circle-role.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.circle-role:hover {
+    transform: scale(1.12);
+    box-shadow: 0 0 30px rgba(255,0,0,0.7);
+    border-color: #fff;
+}
+
+.circle-role img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.85);
+    transition: filter 0.4s;
+}
+
+.circle-role:hover img {
+    filter: brightness(1.1);
+}
+
+.circle-role .info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.75);
+    text-align: center;
+    padding: 12px 8px;
+    color: white;
+    font-size: 14px;
+}
+
+.circle-role .info h3 {
+    font-size: 18px;
+    margin: 0 0 4px;
+    color: #ff0000;
+}
+
+.circle-role .info p {
+    margin: 2px 0;
+    font-size: 13px;
+}
     </style>
 </head>
 
@@ -305,17 +375,42 @@
     </header>
 
     <!-- ===== HERO SLIDES ===== -->
-    <div class="hero" id="heroSlide">
-        <div class="slides">
-            <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1607013252367-d8c8f2b6c29b?auto=format&fit=crop&w=1600&q=80');"></div>
-            <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=1600&q=80');"></div>
-            <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1601582582023-0662ee5e3fa8?auto=format&fit=crop&w=1600&q=80');"></div>
-            <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1558981403-c6f0b8a2347b?auto=format&fit=crop&w=1600&q=80');"></div>
-            <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1620214431913-316d948e2cf6?auto=format&fit=crop&w=1600&q=80');"></div>
-            <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80');"></div>
-            <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1526318472351-3d2d8b8aa1a3?auto=format&fit=crop&w=1600&q=80');"></div>
-            <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1607079738427-9f9c73db2de2?auto=format&fit=crop&w=1600&q=80');"></div>
-        </div>
+<div class="hero" id="heroSlide">
+    <div class="slides">
+        <!-- Clubhouse exterior + bikes parked (active) -->
+        <div class="slide active" style="background-image:url('https://files.catbox.moe/drwfvq.jpeg');"></div>
+        
+        <!-- Massive bike gathering (Harley & custom) -->
+        <div class="slide" style="background-image:url('https://files.catbox.moe/gz7g3c.jpeg');"></div>
+        
+        <!-- Biker crew posing with bikes (Malaysia vibe) -->
+        <div class="slide" style="background-image:url('https://files.catbox.moe/s3451j.jpeg');"></div>
+        
+        <!-- Long line-up of bikes at meet -->
+        <div class="slide" style="background-image:url('https://files.catbox.moe/gukuck.jpeg');"></div>
+        
+        <!-- Classic Harley lineup at clubhouse area -->
+        <div class="slide" style="background-image:url('https://files.catbox.moe/gnk9pr.jpeg');"></div>
+        
+        <!-- Big group ride gathering -->
+        <div class="slide" style="background-image:url('https://files.catbox.moe/meteoj.jpeg');"></div>
+        
+        <!-- Night clubhouse with bikes (dark & gang vibe) -->
+        <div class="slide" style="background-image:url('https://files.catbox.moe/7ddidv.jpeg');"></div>
+        
+        <!-- Another epic gathering -->
+        <div class="slide" style="background-image:url('https://files.catbox.moe/9rojd2.jpeg');"></div>
+    </div>
+
+    <div class="hero-text">
+        <h2>Lost Tribe Motorcycle Gang</h2>
+        <p>Cyberjaya HQ • Since 2025 • Ride or Die</p>
+    </div>
+
+    <div class="nav-btn prev">&#10094;</div>
+    <div class="nav-btn next">&#10095;</div>
+    <div class="dots" id="dotsContainer"></div>
+</div>
 
         <div class="hero-text">
             <h2>Lost Tribe Motorcycle Gang</h2>
@@ -331,57 +426,81 @@
     <section id="about">
         <h2>About Us</h2>
         <div class="card">
-            <p>Lost Tribe Motorcycle Gang is a brotherhood of motorcycle enthusiasts based in Cyberjaya. Founded in 2025, our tribe rides Harley Davidson, custom bikes, and sport bikes across Malaysia. We ride hard, stay loyal, and embrace the freedom of the road.</p>
+            <p>Lost Tribe Motorcycle Gang is an established motorcycle brotherhood based in Cyberjaya, Malaysia. Founded in 2025, the organization brings together passionate riders who share a deep commitment to unity, loyalty, and the spirit of the open road.
+
+Our members ride a diverse range of motorcycles, including Harley-Davidson cruisers, custom-built machines, and high-performance sport bikes. Beyond the machines, Lost Tribe represents discipline, camaraderie, and a strong code of brotherhood that binds every member together.
+
+We are more than a riding group — we are a structured organization built on respect, integrity, and solidarity. Through organized rides, community involvement, and strong internal leadership, Lost Tribe Motorcycle Gang continues to grow as a symbol of unity and pride within the Malaysian riding community.
+
+Ride with honor. Stand with loyalty. Live with freedom.</p>
         </div>
     </section>
 
     <!-- ===== SHOWCASE / GALLERY ===== -->
     <section id="showcase">
-        <h2>Our Bikes & Rides</h2>
-        <div class="gallery">
-            <div class="card"><img src="https://images.unsplash.com/photo-1607013252367-d8c8f2b6c29b?auto=format&fit=crop&w=800&q=80"><p>Harley Davidson • Road King</p></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=800&q=80"><p>Custom Chopper • Street Ride</p></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1601582582023-0662ee5e3fa8?auto=format&w=800&q=80"><p>Sport Bike • Yamaha R1</p></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1558981403-c6f0b8a2347b?auto=format&w=800&q=80"><p>Harley Davidson • Softail</p></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1620214431913-316d948e2cf6?auto=format&w=800&q=80"><p>Road Cruiser • Ducati</p></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&w=800&q=80"><p>Custom Cafe Racer • Honda CB</p></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1526318472351-3d2d8b8aa1a3?auto=format&w=800&q=80"><p>Harley Davidson • Sport Glide</p></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1607079738427-9f9c73db2de2?auto=format&w=800&q=80"><p>BMW R1250 • Adventure</p></div>
-        </div>
+        <h2> Bikes & Rides</h2>
+       <div class="gallery">
+    <div class="card"><img src="https://cdn.dealeraccelerate.com/amtc/2/7866/216576/1920x1440/2000-harley-davidson-road-king-classic-flhrci" alt="Harley Davidson Road King"><p>Harley Davidson • Road King</p></div>
+    <div class="card"><img src="http://purposebuiltmoto.com/cdn/shop/articles/Honda-Chopper-CB900-Bobber-7-of-20.jpg?v=1749614627" alt="Custom Chopper"><p>Custom Chopper • Street Ride</p></div>
+    <div class="card"><img src="https://cdpcdn.dx1app.com/products/USA/YA/2026/MC/SUPERSPORT/YZF-R1/50/70TH_ANNIVERSARY_EDITION/2000000001.jpg" alt="Yamaha R1"><p>Sport Bike • Yamaha R1</p></div>
+    <div class="card"><img src="https://images.bikeexif.com/2024/02/custom-harley-softail-street-bob.jpg" alt="Harley Davidson Softail"><p>Harley Davidson • Softail</p></div>
+    <div class="card"><img src="https://www.morebikes.co.uk/wp-content/uploads/sites/46/2025/02/05-my25_xdiavelv4_dyn-_11__uc750363_high-scaled.jpg" alt="Ducati XDiavel"><p>Road Cruiser • Ducati</p></div>
+    <div class="card"><img src="https://images.bikeexif.com/2016/01/cb-cafe-racer-1.jpg" alt="Honda CB Cafe Racer"><p>Custom Cafe Racer • Honda CB</p></div>
+    <div class="card"><img src="https://ultimatemotorcycling.com/wp-content/uploads/2020/05/2020-Harley-Davidson-Sport-Glide-buyers-guide-cruiser-touring-motorcycle-6.jpg" alt="Harley Davidson Sport Glide"><p>Harley Davidson • Sport Glide</p></div>
+    <div class="card"><img src="https://imotor-cms-uploads.s3.amazonaws.com/editor_uploads/CiGpHnJ_Obq0esFiGE4Lnw.jpg" alt="BMW R1250 GS Adventure"><p>BMW R1250 • Adventure</p></div>
+</div>
     </section>
 
     <!-- ===== CREW / ORGANIZATION CHART ===== -->
-    <section id="crew">
-        <h2>Our Tribe</h2>
-        <div class="chart">
-            <div class="role" id="captain">
+<section id="crew">
+    <h2>Our Tribe</h2>
+    <div class="chart-horizontal">
+        <div class="circle-role" id="captain">
+            <img src="https://www.autoevolution.com/images/moto/Modenas-Jaguh-175-2011-main.jpg" alt="Modenas Jaguh">
+            <div class="info">
                 <h3>Jai</h3>
                 <p>Captain</p>
-                <p>Bike: Medenas Jaguh</p>
+                <p>Bike: Modenas Jaguh</p>
             </div>
-            <div class="role" id="treasurer">
+        </div>
+
+        <div class="circle-role" id="treasurer">
+            <img src="https://www.brixton-motorcycles.com/media/pages/motorcycles/bx-125/6a4f0d3f1b-1717588740/brixton-bx125-black-01.jpg" alt="Brixton">
+            <div class="info">
                 <h3>Adli</h3>
                 <p>Treasurer</p>
                 <p>Bike: Brixton</p>
             </div>
-            <div class="role" id="advisor">
+        </div>
+
+        <div class="circle-role" id="advisor">
+            <img src="https://imgd.aeplcdn.com/1056x594/n/cw/ec/45490/duke-200-right-side-view.jpeg?isig=0&q=100" alt="KTM Duke 200">
+            <div class="info">
                 <h3>Sham</h3>
                 <p>Advisor</p>
                 <p>Bike: Duke 200</p>
             </div>
-            <div class="role" id="enforcer">
+        </div>
+
+        <div class="circle-role" id="enforcer">
+            <img src="https://files.catbox.moe/3xox8o.jpeg" alt="Wmoto M16">
+            <div class="info">
                 <h3>Han</h3>
                 <p>Enforcer</p>
                 <p>Bike: Wmoto M16</p>
             </div>
-            <div class="role" id="sgt">
+        </div>
+
+        <div class="circle-role" id="sgt">
+            <img src="https://imgd.aeplcdn.com/1056x594/n/cw/ec/45490/duke-200-exterior-8.jpeg?isig=0&q=100" alt="KTM Duke 200">
+            <div class="info">
                 <h3>Aiman</h3>
                 <p>Sgt A Arm</p>
                 <p>Bike: KTM Duke 200</p>
             </div>
         </div>
-        <div class="motorbike" id="motorbike"></div>
-    </section>
+    </div>
+</section>
 
     <!-- ===== INSTAGRAM FEED ===== -->
     <section id="instagram">
@@ -518,6 +637,15 @@
                 popup.style.display = 'none';
             }
         });
+
+        // Scroll animation for circle roles
+window.addEventListener("scroll", () => {
+    document.querySelectorAll(".circle-role").forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+            el.classList.add("show");
+        }
+    });
+});
     </script>
 
 </body>
